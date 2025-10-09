@@ -84,7 +84,7 @@ wandb.login()  # Enter your W&B API key
 └── README.md                    # This file
 ```
 
-## 🔍 Exploratory Data Analysis
+##  Exploratory Data Analysis
 
 ### Key Findings:
 - **No null values** in the dataset
@@ -100,7 +100,7 @@ wandb.login()  # Enter your W&B API key
 - Class balance visualization
 - Invalid data analysis per feature
 
-## 🛠️ Data Preprocessing
+## Data Preprocessing
 
 ### Preprocessing Pipeline:
 
@@ -118,7 +118,7 @@ ColumnTransformer with:
 
 ### Key Preprocessing Decisions:
 - **Imputation Strategy:** Used median for features with outliers, mean for more normally distributed features
-- **Scaling:** Applied StandardScaler for distance-based algorithms (SVM, KNN)
+- **Scaling:** Applied StandardScaler for distance-based algorithms (KNN)
 - **Invalid Values:** Replaced zeros with imputed values instead of dropping rows
 
 ## Models & Results
@@ -126,125 +126,67 @@ ColumnTransformer with:
 All models were trained with:
 - **Hyperparameter Tuning:** RandomizedSearchCV with 5-fold cross-validation
 - **Evaluation Metrics:** Accuracy, ROC-AUC, PR-AUC, MCC, Precision, Recall
-- **Class Weighting:** Applied where applicable (Decision Tree, Random Forest, SVM)
-
-### Models Evaluated:
-
-#### 1. Decision Tree (dt)
-
-Best Params → {'criterion': 'log_loss', 'max_depth': 5, 'min_samples_split': 2} 
-Train → Acc: 0.746 | ROC-AUC: 0.897 | MCC: 0.558 | [Run](https://wandb.ai/adham_ayman/diabetes_experiments/runs/z21hy3o2/overview)
-Val → Acc: 0.626 | ROC-AUC: 0.697 | MCC: 0.258 | [Run](https://wandb.ai/adham_ayman/diabetes_experiments/runs/pc3n3var/overview)
-
-
----
-
-#### 2. K-Nearest Neighbors (knn)
-
-Best Params → {'n_neighbors': 13, 'p': 1, 'weights': 'uniform'} 
-Train → Acc: 0.797 | ROC-AUC: 0.853 | MCC: 0.532 | [Run](https://wandb.ai/adham_ayman/diabetes_experiments/runs/f0pihdip/overview)
-Val → Acc: 0.686 | ROC-AUC: 0.731 | MCC: 0.336 | [Run](https://wandb.ai/adham_ayman/diabetes_experiments/runs/mjkyokdu/overview)
-
----
-
-#### 3. Random Forest (rf)
-
-Best Params → {'bootstrap': True, 'max_depth': 12, 'min_samples_split': 2, 'n_estimators': 209} 
- 
-Train → Acc: 0.986 | ROC-AUC: 0.999 | MCC: 0.971 | [Run](https://wandb.ai/adham_ayman/diabetes_experiments/runs/f45ghpca/overview)
-Val → Acc: 0.678 | ROC-AUC: 0.745 | MCC: 0.311 | [Run](https://wandb.ai/adham_ayman/diabetes_experiments/runs/xsd7ux4e/overview)
-
----
-
-#### 4. Support Vector Machine (svm)
-
-Best Params → {} 
- 
-Train → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-Val → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-
----
-
-#### 5. XGBoost (xgb)
-
-Best Params → {} 
- 
-Train → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-Val → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-
----
-
-#### 6. LightGBM (lgbm)
-
-Best Params → {} 
- 
-Train → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-Val → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-
----
-
-#### 7. CatBoost (cat)
-
-Best Params → {} 
- 
-Train → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-Val → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-
----
-
-#### 8. AdaBoost (ada)
-
-Best Params → {} 
- 
-Train → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-Val → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-
----
-
-#### 9. Stacking Classifier (stack)
-
-Best Params → {} 
- 
-Train → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-Val → Acc: 0. | ROC-AUC: 0. | MCC: 0. | [Run]()
-
----
+- **Class Weighting:** Applied where applicable (Decision Tree, Random Forest, KNN)
 
 ## Handling Imbalanced Dataset
 
-### Approach: SMOTEENN (SMOTE + Edited Nearest Neighbors)
-
-**Before Resampling:**
-- Label '0' (Non-diabetic): XXX samples
-- Label '1' (Diabetic): XXX samples
-
-**After Resampling:**
-- Label '0' (Non-diabetic): XXX samples
-- Label '1' (Diabetic): XXX samples
-
-### Models Retrained on Balanced Data:
-
-#### Results Summary:
-
-| Model           | Test Accuracy | Test ROC-AUC |  Test MCC   |
-|-----------------|---------------|--------------|-------------|
-| Decision Tree   | X.XX%         | X.XXX        | X.XXX       |
-| Random Forest   | X.XX%         | X.XXX        | X.XXX       |
-| SVM             | X.XX%         | X.XXX        | X.XXX       |
-| XGBoost         | X.XX%         | X.XXX        | X.XXX       |
-| Stacking        | X.XX%         | X.XXX        | X.XXX       |
-
-### Other Techniques Explored:
+### Techniques Explored:
 >  **Work in Progress** - Additional imbalance handling techniques being evaluated:
 > - SMOTE (Synthetic Minority Over-sampling Technique)
 > - ADASYN (Adaptive Synthetic Sampling)
 > - SMOTEN (SMOTE for Nominal features)
 > - SVMSMOTE (SVM-based SMOTE)
-> - Random Undersampling
+> - SMOTEENN
 > - Class Weight Adjustment
 
 **Preliminary Findings:**
-- [To be filled after experiments complete]
+
+###  **Final Findings Summary**
+
+After completing all experiments — from base models to imbalanced handling, tuning, and final calibration — the following insights were observed:
+
+#### **1. Baseline Models**
+
+* Initial models (Decision Tree, Random Forest, Logistic Regression, KNN, etc.) were trained on the original imbalanced dataset.
+* Accuracy scores ranged between **0.62 – 0.75** on the validation set, but **ROC-AUC values** were inconsistent (0.69–0.84), showing class imbalance impact.
+* Random Forest and KNN achieved the most stable validation results but tended to **overfit** on training data.
+
+#### **2. Imbalanced Data Handling**
+
+* Applied multiple resampling methods: **SMOTE**, **ADASYN**, and **SMOTEENN**.
+* **SMOTEENN with KNN** produced the best trade-off between recall and precision for the minority (diabetic) class.
+* After balancing, the model achieved roughly **68–70% validation accuracy** with better recall for diabetic cases, improving fairness between classes.
+
+#### **3. Best Model Selection**
+
+* The **KNN model trained on SMOTEENN-balanced data** was chosen as the best-performing model based on overall metrics:
+
+  * **Accuracy (Val):** ~0.695
+  * **ROC-AUC (Val):** ~0.73
+  * **MCC (Val):** ~0.38
+  * It offered consistent recall and precision across both classes, unlike deeper tree-based models that overfit.
+
+#### **4. Calibration and Final Evaluation**
+
+* Final test evaluation on unseen data showed:
+
+  * **Accuracy:** 0.75
+  * **ROC-AUC:** 0.843
+  * **PR-AUC:** 0.651
+  * **MCC:** 0.457
+  * **Confusion Matrix:**
+
+    * Non-diabetic: Precision = 0.82, Recall = 0.79
+    * Diabetic: Precision = 0.63, Recall = 0.68
+* The calibration improved probability reliability (Brier score ↓ from 0.174 → 0.165) even though overall accuracy remained stable.
+
+#### **5. Key Takeaways**
+
+* Calibration slightly improved probability estimates but did not significantly alter accuracy — consistent with expectations for small datasets.
+* The final model generalizes well given the limited data size (768 samples).
+* **KNN with SMOTEENN + Sigmoid Calibration** provides the best balance between interpretability, fairness, and reliability.
+
+---
 
 ## Experiment Tracking
 
@@ -268,10 +210,9 @@ Project: `diabetes_experiments`
 ### Viewing Results:
 ```bash
 # Access your W&B dashboard at:
-https://wandb.ai/adham_ayman/diabetes_experiments
+https://wandb.ai/adham_ayman/pima_indians_diabetes_experiments
 ```
-
-## 💻 Usage
+##  Usage
 
 ### 1. Clone/Download the Project
 
@@ -303,10 +244,10 @@ evaluate_binary_classification(
 )
 ```
 
-## 🔮 Future Work
+##  Future Work
 
 ### Planned Improvements:
-- [ ] Complete comprehensive imbalance handling experiments
+- [X] Complete comprehensive imbalance handling experiments
 - [ ] Feature engineering (polynomial features, interaction terms)
 - [ ] Deep learning approaches (Neural Networks)
 - [ ] Model interpretability (SHAP values, feature importance)
@@ -320,13 +261,13 @@ evaluate_binary_classification(
 - [ ] Ensemble learning with voting classifiers
 - [ ] Time-based validation splits (if temporal data available)
 
-## 📝 Notes
+##  Notes
 
-- **Training Time:** Some models (SVM, XGBoost, LightGBM) can take significant time to train, especially with RandomizedSearchCV
+- **Training Time:** Some models (KNN, XGBoost, LightGBM) can take significant time to train, especially with RandomizedSearchCV
 - **Randomness:** All models use `random_state=21` for reproducibility
 
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Dataset: National Institute of Diabetes and Digestive and Kidney Diseases
 - Libraries: scikit-learn, XGBoost, LightGBM, CatBoost, imbalanced-learn, W&B
